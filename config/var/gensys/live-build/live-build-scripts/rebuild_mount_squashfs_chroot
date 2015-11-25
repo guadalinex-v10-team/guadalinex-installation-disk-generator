@@ -1,0 +1,60 @@
+#!/bin/sh
+
+## live-build(7) - System Build Scripts
+## Copyright (C) 2006-2013 Daniel Baumann <daniel@debian.org>
+##
+## This program comes with ABSOLUTELY NO WARRANTY; for details see COPYING.
+## This is free software, and you are welcome to redistribute it
+## under certain conditions; see COPYING for details.
+
+
+
+# Including common functions
+[ -e "${LIVE_BUILD}/scripts/build.sh" ] && . "${LIVE_BUILD}/scripts/build.sh" || . /usr/lib/live/build.sh
+
+# Setting static variables
+DESCRIPTION="$(Echo 'mount chroot from isos squashfs stage')"
+HELP=""
+USAGE="${PROGRAM} [--force]"
+
+SQUASHFS_FILE=$(find binary/ -name '*.squashfs')
+
+# Reading configuration files
+Read_conffiles config/all config/common config/bootstrap config/chroot config/binary config/source
+Set_defaults
+
+#put code to remount here
+Echo_message "Mounting squashfs file $1"
+
+set +e
+
+umount chroot
+rm -rf chroot
+mkdir chroot
+
+umount chroot_ro
+rm -rf chroot_ro
+mkdir chroot_ro
+
+umount chroot_changes 
+rm -rf chroot_changes
+mkdir chroot_changes
+
+
+
+mount -o loop -t squashfs $SQUASHFS_FILE chroot_ro
+if [ $? -ne 0 ]
+then
+	Echo_error "Cant mount iso file $SQUASHFS_FILE"
+	exit 1
+fi
+
+mount -t aufs -o dirs=$(pwd)/chroot_changes=rw:$(pwd)/chroot_ro=ro: aufs chroot
+if [ $? -ne 0 ]
+then
+	Echo_error "Cant mount aufs for $SQUASHFS_FILE"
+	exit 1
+fi
+
+Create_stagefile .build/bootstrap
+Create_stagefile .build/config
