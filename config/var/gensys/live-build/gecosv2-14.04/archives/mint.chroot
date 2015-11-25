@@ -1,0 +1,2 @@
+#deb http://localhost/mint-qiana qiana main upstream import backport romeo
+deb http://v2.gecos.guadalinex.org/mint-20150701 qiana main upstream import backport

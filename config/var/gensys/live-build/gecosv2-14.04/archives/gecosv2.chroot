@@ -1,0 +1,3 @@
+#deb http://localhost/gecos-trusty v2 main 
+#Deleted Ubuntu and Mint repositories
+deb http://v2.gecos.guadalinex.org/gecos-20150701/    v2                 main 

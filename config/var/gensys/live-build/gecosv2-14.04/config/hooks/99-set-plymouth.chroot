@@ -1,0 +1,5 @@
+#!/bin/bash
+update-alternatives --set default.plymouth /lib/plymouth/themes/gecos/gecos.plymouth
+update-alternatives --set text.plymouth /lib/plymouth/themes/gecos-text/gecos-text.plymouth
+
+echo "FRAMEBUFFER=y" > /etc/initramfs-tools/conf.d/splash

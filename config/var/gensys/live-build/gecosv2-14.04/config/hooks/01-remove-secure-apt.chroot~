@@ -1,0 +1,2 @@
+[ -e /etc/apt/apt.conf.d/00secure ] && rm /etc/apt/apt.conf.d/00secure
+apt-key list | grep -q "guadalinex@repos.com" &&  apt-key del "David Amian <guadalinex@repos.com>"

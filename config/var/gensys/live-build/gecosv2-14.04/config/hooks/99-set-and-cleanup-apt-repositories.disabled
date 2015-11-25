@@ -1,0 +1,14 @@
+#!/bin/bash
+
+rm /etc/apt/sources.list.d/*
+
+cat > /etc/apt/sources.list <<EOF
+deb http://v2.gecos.guadalinex.org/ubuntu   trusty             main restricted universe multiverse
+deb http://v2.gecos.guadalinex.org/ubuntu   trusty-updates     main restricted universe multiverse
+deb http://v2.gecos.guadalinex.org/ubuntu   trusty-security    main restricted universe multiverse
+deb http://v2.gecos.guadalinex.org/ubuntu   trusty-backports   main restricted universe multiverse
+
+deb http://v2.gecos.guadalinex.org/mint     maya                main upstream import backport
+
+deb http://v2.gecos.guadalinex.org/gecos    v2                  main 
+EOF
