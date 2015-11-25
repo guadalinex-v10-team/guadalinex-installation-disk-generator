@@ -1,0 +1,4 @@
+#!/bin/bash
+
+bash /var/gensys/testsys/stop
+bash /var/gensys/testsys/start

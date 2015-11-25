@@ -1,0 +1,12 @@
+#!/bin/bash
+
+if [ `whoami` != "gensys" ]
+then
+        echo "Ejecutame como usuario gensys"
+        exit 1
+fi
+
+buildbot start /var/gensys/testsys/gv9master
+cd /var/gensys/testsys/pkgbuilderbot; buildslave start; cd ..
+cd /var/gensys/testsys/gensysbot; buildslave start; cd ..
+

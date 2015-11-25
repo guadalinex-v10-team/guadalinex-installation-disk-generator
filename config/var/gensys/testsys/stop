@@ -1,0 +1,6 @@
+#!/bin/bash
+
+cd /var/gensys/testsys/pkgbuilderbot; buildslave stop; cd ..
+cd /var/gensys/testsys/gensysbot; buildslave stop; cd ..
+buildbot stop /var/gensys/testsys/gv9master
+
