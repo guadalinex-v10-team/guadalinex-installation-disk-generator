@@ -1,0 +1,4 @@
+#!/bin/bash
+pkg_name=$(basename `pwd`)
+revisioncount=`git rev-list HEAD | wc -l`
+sed -ri 's/^version\:(.*)/version\:\1gecos'$revisioncount'/g' gcs/info
