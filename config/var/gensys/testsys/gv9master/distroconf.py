@@ -6,7 +6,7 @@
 #######
 
 # A polling time in seconds to detect changes into git repositories
-polling_time = 30
+polling_time = 60
 
 # List with apps names. The name is the same that repository into github organization gecos-team
 # If you add a new app builbot managed this
@@ -73,9 +73,7 @@ metapkgs_gecos = [
 metapkgs = [
      "gecosws-icon-theme",
      "gecosws-mdm-theme",
-#     "gecosws-firerfox-wrapper",
      "gecosws-ubiquity",
-#     "guadalinexv9-firefox-24.2.0-32",
 ]
 
 apps = [
@@ -87,7 +85,7 @@ halt_on_lintian_error = False
 # Script live-build
 #livebuild_gv9 = "sudo /var/gensys/live-build/guadalinexv9/buildv9.sh"
 #livebuild_gv9_light = "sudo /var/gensys/live-build/guadalinexv9-light/buildv9-light.sh"
-livebuild_gecosv2 = "sudo /var/gensys/live-build/gecosv2/buildgecos.sh"
+livebuild_gecosv2 = "sudo /var/gensys/live-build/gecosv2-14.04/buildgecos.sh"
 #livebuild_gecosv2_light = "sudo /var/gensys/live-build/gecosv2-light/buildgecoslight.sh"
 
 # Codename of repository
