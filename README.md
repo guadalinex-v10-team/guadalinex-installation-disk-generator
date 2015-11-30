@@ -3,7 +3,7 @@ Configuration files for the generation system of GECOS Workstations ISO disk ima
 
 This repository contains:
 
-* A guide (check the wiki) to install an automated building system for GECOS disks
+* A guide [check the wiki](https://github.com/gecos-team/gecosws-installation-disk-generator/wiki) to install an automated building system for GECOS disks
 
 * Configuration and template files needed for this system
 
