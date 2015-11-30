@@ -108,7 +108,7 @@ repo_dir_gecos_trusty = "/var/gensys/deb-repositories/gecos-trusty"
 #rawimage_gv9_light = "/var/gensys/live-build/guadalinexv9-light/binary.hybrid.iso"
 #ftpimage_gv9_light = "/var/gensys/deb-repositories/isos/guadalinexv9-light-desktop-32bits.iso"
 #rawimage_gecos_light = "/var/gensys/live-build/gecosv2-light/binary.hybrid.iso"
-rawimage_gecos = "/var/gensys/live-build/gecosv2/binary.hybrid.iso"
+rawimage_gecos = "/var/gensys/live-build/gecosv2-14.04/binary.hybrid.iso"
 ftpimage_gecos = "/var/gensys/deb-repositories/isos/gecosv2-desktop-32bits.iso"
 #ftpimage_gecos_light = "/var/gensys/deb-repositories/isos/gecosv2-light-desktop-32bits.iso"
 
