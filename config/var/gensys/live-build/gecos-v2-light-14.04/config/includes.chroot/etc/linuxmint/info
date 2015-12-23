@@ -1,0 +1,11 @@
+RELEASE=14.04
+DISTRIB_ID=Ubuntu
+CODENAME=trusty
+EDITION="Lxde 32-bit"
+DESCRIPTION="Gecos V2 Lite"
+DESKTOP=Lxde
+TOOLKIT=GTK
+NEW_FEATURES_URL=http://www.guadalinex.org
+RELEASE_NOTES_URL=http://www.guadalinex.org
+USER_GUIDE_URL=http://www.guadalinex.org
+GRUB_TITLE=Gecos V2 Lite 32bits

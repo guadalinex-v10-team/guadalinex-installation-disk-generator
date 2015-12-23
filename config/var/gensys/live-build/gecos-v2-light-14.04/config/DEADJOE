@@ -1,0 +1,34 @@
+
+*** These modified files were found in JOE when it aborted on Thu Dec  3 10:33:52 2015
+*** JOE was aborted because the terminal closed
+
+*** File '(Unnamed)'
+http://v2.gecos.guadalinex.org/ubuntu-20150701/
+/
+/
+
+*** File '(Unnamed)'
+/-20150701/
+-20150701/
+light
+build
+LiveB
+ight
+ight
+light
+LiveBuildG
+light
+
+*** File '(Unnamed)'
+includes.chroot
+includes.debian-installer
+package-lists
+packages
+packages.binary
+packages.chroot
+preseed
+rootfs
+source
+binary
+bootstrap
+../../gecosv2/config/bootstrap

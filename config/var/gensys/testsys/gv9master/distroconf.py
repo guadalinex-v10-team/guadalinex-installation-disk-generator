@@ -6,14 +6,10 @@
 #######
 
 # A polling time in seconds to detect changes into git repositories
-polling_time = 60
+polling_time = 120
 
 # List with apps names. The name is the same that repository into github organization gecos-team
 # If you add a new app builbot managed this
-
-#apps_gv9 = [
-#    "commiecc",
-#]
 
 apps_gecos = [
     "gecosws-config-assistant",
@@ -65,15 +61,15 @@ metapkgs_gecos = [
      "gecosws-chef-notifier-cinnamon",
 #     "gecosws-chef-snitch",
      "java-nss-fix",
-#    "gecosws-meta",
-#    "gecosws-artwork",
    
 ]
 
 metapkgs = [
      "gecosws-icon-theme",
      "gecosws-mdm-theme",
+#     "gecosws-firerfox-wrapper",
      "gecosws-ubiquity",
+#     "guadalinexv9-firefox-24.2.0-32",
 ]
 
 apps = [
@@ -85,8 +81,8 @@ halt_on_lintian_error = False
 # Script live-build
 #livebuild_gv9 = "sudo /var/gensys/live-build/guadalinexv9/buildv9.sh"
 #livebuild_gv9_light = "sudo /var/gensys/live-build/guadalinexv9-light/buildv9-light.sh"
-livebuild_gecosv2 = "sudo /var/gensys/live-build/gecosv2-14.04/buildgecos.sh"
-#livebuild_gecosv2_light = "sudo /var/gensys/live-build/gecosv2-light/buildgecoslight.sh"
+livebuild_gecosv2 = "sudo /var/gensys/live-build/gecosv2/buildgecos.sh"
+livebuild_gecosv2_light = "sudo /var/gensys/live-build/gecosv2-light/buildgecoslight.sh"
 
 # Codename of repository
 #codename_v9 = "quebrantahuesos"
@@ -107,14 +103,14 @@ repo_dir_gecos_trusty = "/var/gensys/deb-repositories/gecos-trusty"
 #ftpimage_gv9 = "/var/gensys/deb-repositories/isos/guadalinexv9-desktop-32bits.iso"
 #rawimage_gv9_light = "/var/gensys/live-build/guadalinexv9-light/binary.hybrid.iso"
 #ftpimage_gv9_light = "/var/gensys/deb-repositories/isos/guadalinexv9-light-desktop-32bits.iso"
-#rawimage_gecos_light = "/var/gensys/live-build/gecosv2-light/binary.hybrid.iso"
-rawimage_gecos = "/var/gensys/live-build/gecosv2-14.04/binary.hybrid.iso"
+rawimage_gecos = "/var/gensys/live-build/gecosv2/binary.hybrid.iso"
+rawimage_gecos_light = "/var/gensys/live-build/gecosv2-light/binary.hybrid.iso"
 ftpimage_gecos = "/var/gensys/deb-repositories/isos/gecosv2-desktop-32bits.iso"
-#ftpimage_gecos_light = "/var/gensys/deb-repositories/isos/gecosv2-light-desktop-32bits.iso"
+ftpimage_gecos_light = "/var/gensys/deb-repositories/isos/gecosv2-light-desktop-32bits.iso"
 
 
 #gensys_gv9_time = "00:00"
 #gensys_gv9_light_time = "02:00"
 gensys_gecos_time = "04:00"
-#gensys_gecos_light_time = "06:00"
+gensys_gecos_light_time = "06:00"
 

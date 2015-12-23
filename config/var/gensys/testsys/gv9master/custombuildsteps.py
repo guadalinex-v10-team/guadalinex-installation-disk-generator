@@ -6,7 +6,7 @@ from buildbot.status.builder import SUCCESS, FAILURE, WARNINGS
 import subprocess
 import distroconf
 from distroconf import halt_on_lintian_error
-from distroconf import livebuild_gecosv2, pdebuild, pdebuildtrusty, codename_gecos
+from distroconf import livebuild_gecosv2, livebuild_gecosv2_light, pdebuild, pdebuildtrusty, codename_gecos
 
 class RemoveGIT(ShellCommand):
     """ Removes the .svn directories recursively"""
@@ -196,6 +196,30 @@ class LiveBuildGecos(ShellCommand):
         return SUCCESS
 
 
+class LiveBuildGecosLight(ShellCommand):
+    name = "livebuild"
+    command = livebuild_gecosv2_light
+    description = [name]
+
+    def __init__(self, **kwargs):
+        ShellCommand.__init__(self, **kwargs)
+
+    def createSummary(self, log):
+        for line in log.readlines():
+            if line.strip().startswith("Error:"):
+                self.error_log = line
+
+    def evaluateCommand(self, cmd):
+        self.descriptionDone = [self.name]
+
+        if cmd.rc == 255:
+                self.descriptionDone.append(self.error_log)
+                return FAILURE
+
+        if cmd.rc != 0:
+                return FAILURE
+
+        return SUCCESS
 
 
 class SetGitRevGecos(ShellCommand):
@@ -253,4 +277,12 @@ class SetBinaryPermsGecos(ShellCommand):
     def __init__(self, **kwargs):
         ShellCommand.__init__(self, **kwargs)
 
+
+class SetBinaryPermsGecosLight(ShellCommand):
+    name = "set-binary-perms-gecos-light"
+    description = [name]
+    command = ["sh", "-c", "sudo chmod -R 755 "+distroconf.rawimage_gecos_light]
+
+    def __init__(self, **kwargs):
+        ShellCommand.__init__(self, **kwargs)
 

@@ -1,0 +1,13 @@
+#!/bin/bash
+
+rm /etc/apt/sources.list.d/*
+
+cat > /etc/apt/sources.list <<EOF
+deb http://fr.archive.ubuntu.com/ubuntu precise main restricted universe multiverse
+deb http://fr.archive.ubuntu.com/ubuntu precise-updates main restricted universe multiverse
+deb http://fr.archive.ubuntu.com/ubuntu precise-security main restricted universe multiverse
+deb http://fr.archive.ubuntu.com/ubuntu precise-backports main restricted universe multiverse
+deb http://archive.canonical.com/ubuntu precise partner
+
+deb http://packages.linuxmint.com/ maya main upstream import backport
+EOF

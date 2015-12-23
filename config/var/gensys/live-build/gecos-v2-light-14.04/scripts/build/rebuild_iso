@@ -1,0 +1,82 @@
+#!/bin/sh
+
+## live-build(7) - System Build Scripts
+## Copyright (C) 2006-2013 Daniel Baumann <daniel@debian.org>
+##
+## This program comes with ABSOLUTELY NO WARRANTY; for details see COPYING.
+## This is free software, and you are welcome to redistribute it
+## under certain conditions; see COPYING for details.
+
+
+set -e
+
+# Including common functions
+[ -e "${LIVE_BUILD}/scripts/build.sh" ] && . "${LIVE_BUILD}/scripts/build.sh" || . /usr/lib/live/build.sh
+
+# Automatically populating config tree
+if [ -x auto/config ] && [ ! -e .build/config ]
+then
+	Echo_message "Automatically populating config tree."
+	lb config
+fi
+
+
+# Setting static variables
+DESCRIPTION="$(Echo 'remasterize a Debian iso file')"
+HELP=""
+USAGE="${PROGRAM} iso_file"
+
+ISO_FILE=$1
+if [ -z $ISO_FILE ] || [ ! -e $ISO_FILE ]
+then
+	Echo_error "Please, give a valid iso file"
+	exit 1
+fi
+
+if [ ! -d config ]
+then
+	Echo_warning "No config/ directory; using defaults for all options"
+fi
+
+if [ "$(pwd)" = "/" ]
+then
+	Echo_error "Cannot build live image from the root directory (/)"
+	exit 1
+fi
+
+if echo $(pwd) | grep -qs " "
+then
+	Echo_error "Cannot build live image from a directory containing spaces"
+	exit 1
+fi
+
+# Reading configuration files
+Read_conffiles config/all config/common config/bootstrap config/chroot config/binary config/source
+Set_defaults
+echo 1
+# Checking defaults
+Check_defaults
+
+echo 2
+
+# prepare unionfs iso environment
+lb rebuild_umount
+lb rebuild_iso_mount $ISO_FILE
+
+echo 3
+# Customizing chroot
+lb rebuild_squashfs_chroot ${@}
+
+echo 4
+# Building binary images
+lb rebuild_iso_binary ${@}
+
+echo 5
+# Building source images
+lb rebuild_source ${@}
+
+echo 6
+# umount read only dirs
+lb rebuild_umount ${@}
+
+echo 7
