@@ -1,9 +1,9 @@
-# gecosws-installation-disk-generator
-Configuration files for the generation system of GECOS Workstations ISO disk images
+# guadalinex-installation-disk-generator
+Configuration files for the generation system of Guadalinex ISO disk images
 
 This repository contains:
 
-* A guide ([check the wiki](https://github.com/gecos-team/gecosws-installation-disk-generator/wiki)) to install an automated building system for GECOS disks
+* A guide ([check the wiki](https://github.com/guadalinex-v10-team/guadalinex-installation-disk-generator/wiki)) to install an automated building system for Guadalinex disks
 
 * Configuration and template files needed for this system
 

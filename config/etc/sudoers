@@ -26,5 +26,4 @@ root	ALL=(ALL:ALL) ALL
 
 #includedir /etc/sudoers.d
 
-gensys ALL = (ALL) ALL, SETENV: /usr/sbin/pbuilder, NOPASSWD: /bin/chmod, /usr/lib/pbuilder/pbuilder-satisfydepends, /usr/sbin/cowbuilder, /usr/bin/pdebuild, /usr/sbin/pbuilder, /var/gensys/live-build/gecosv2-14.04/buildgecos.sh
-
+gensys ALL = (ALL) ALL, SETENV: /usr/sbin/pbuilder, NOPASSWD: /bin/chmod, /usr/lib/pbuilder/pbuilder-satisfydepends, /usr/sbin/cowbuilder, /usr/bin/pdebuild, /usr/sbin/pbuilder, /var/gensys/live-build/guadalinexv10/buildgv10.sh, /var/gensys/live-build/guadalinexv10-lite/buildgv10lite.sh
