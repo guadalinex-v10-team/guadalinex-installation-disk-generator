@@ -6,7 +6,7 @@ from buildbot.status.builder import SUCCESS, FAILURE, WARNINGS
 import subprocess
 import distroconf
 from distroconf import halt_on_lintian_error
-from distroconf import livebuild_gecosv2, livebuild_gecosv2_light, pdebuild, pdebuildtrusty, codename_gecos
+from distroconf import livebuild_gv10, livebuild_gv10_lite, pdebuild, codename_gv10
 
 class RemoveGIT(ShellCommand):
     """ Removes the .svn directories recursively"""
@@ -19,7 +19,7 @@ class RemoveGIT(ShellCommand):
         ShellCommand.__init__(self, **kwargs)
 
 
-class PBuildPkgTrusty(ShellCommand):
+class PBuildPkg(ShellCommand):
     """Perfoms the building of a package with pdebuild
     It counts and logs lintian error and lintian warnings.
     On lintian errors can return FAILURE if distroconf.halt_on_lintian_error 
@@ -27,7 +27,7 @@ class PBuildPkgTrusty(ShellCommand):
     """
 
     name = "PBuildPkg"
-    command = pdebuildtrusty
+    command = pdebuild
     description = [name]
 
     def __init__(self, **kwargs):
@@ -137,12 +137,12 @@ class GCSBuild(PBuildPkg):
         PBuildPkg.__init__(self, **kwargs)
 
 
-class FreightAddGecosTrusty(ShellCommand):
-    name = "FreightAddGecosTrusty"
+class FreightAddGv10(ShellCommand):
+    name = "FreightAddGv10"
     description = [name]
     command = ["sh", "-c",\
-        "freight add -c /etc/freight-gecosv2-trusty.conf %(package)s apt/%(codename)s;"  \
-            %  {'codename': codename_gecos,\
+        "freight add -c /etc/freight-gv10.conf %(package)s apt/%(codename)s;"  \
+            %  {'codename': codename_gv10,\
                 'package': '../*deb'}]
 
     def __init__(self, **kwargs):
@@ -158,11 +158,11 @@ class RemoveDebs(ShellCommand):
         ShellCommand.__init__(self, **kwargs)	
 
 
-class FreightCacheGecosTrusty(ShellCommand):
-    name = "FreightCacheGecosTrusty"
+class FreightCacheGv10(ShellCommand):
+    name = "FreightCacheGv10"
     description = [name]
-    command = ["sh", "-c","rm -f /var/gensys/deb-repositories/gecos-trusty/dists/%(codename)s; freight cache -c /etc/freight-gecosv2-trusty.conf -p /var/gensys/repo.key" \
-            % {'codename': codename_gecos}]
+    command = ["sh", "-c","rm -f /var/gensys/deb-repositories/guadalinex/dists/%(codename)s; freight cache -c /etc/freight-gv10.conf -p /var/gensys/repo.key" \
+            % {'codename': codename_gv10}]
 
 
     def __init__(self, **kwargs):
@@ -170,9 +170,9 @@ class FreightCacheGecosTrusty(ShellCommand):
 
 
 
-class LiveBuildGecos(ShellCommand):
+class LiveBuildGv10(ShellCommand):
     name = "livebuild"
-    command = livebuild_gecosv2
+    command = livebuild_gv10
     description = [name]
 
     def __init__(self, **kwargs):
@@ -196,9 +196,9 @@ class LiveBuildGecos(ShellCommand):
         return SUCCESS
 
 
-class LiveBuildGecosLight(ShellCommand):
+class LiveBuildGv10Lite(ShellCommand):
     name = "livebuild"
-    command = livebuild_gecosv2_light
+    command = livebuild_gv10_lite
     description = [name]
 
     def __init__(self, **kwargs):
@@ -222,66 +222,41 @@ class LiveBuildGecosLight(ShellCommand):
         return SUCCESS
 
 
-class SetGitRevGecos(ShellCommand):
+class SetGitRevGv10(ShellCommand):
     """
     In gcs packages, it sets the svn-revision as package version/revision.
     """
     name = "SetGitRev"
-    command = ["git-revision-gecos"]
-    description = [name]
-
-    def __init__(self, **kwargs):
-        ShellCommand.__init__(self, **kwargs)
-
-class SetGitRevGecosDev(ShellCommand):
-    """
-    In gcs packages, it sets the svn-revision as package version/revision.
-    """
-    name = "SetGitRevDev"
-    command = ["git-revision-gecos-dev"]
-    description = [name]
-
-    def __init__(self, **kwargs):
-        ShellCommand.__init__(self, **kwargs)
-
-class SetGitRevGecosTrusty(ShellCommand):
-    """
-    In gcs packages, it sets the svn-revision as package version/revision.
-    """
-    name = "SetGitRevTrusty"
-    command = ["git-revision-gecos-trusty"]
+    command = ["git-revision-gv10"]
     description = [name]
 
     def __init__(self, **kwargs):
         ShellCommand.__init__(self, **kwargs)
 
 
-
-
-
-class SetRepoPermsGecosTrusty(ShellCommand):
+class SetRepoPermsGv10(ShellCommand):
     name = "set-repository-perms"
     description = [name]
-    command = ["sh", "-c", "sudo chmod -R 755 "+distroconf.repo_dir_gecos_trusty]
+    command = ["sh", "-c", "sudo chmod -R 755 "+distroconf.repo_dir_gv10]
 
     def __init__(self, **kwargs):
         ShellCommand.__init__(self, **kwargs)
 
 
 
-class SetBinaryPermsGecos(ShellCommand):
-    name = "set-binary-perms-gecos"
+class SetBinaryPermsGv10(ShellCommand):
+    name = "set-binary-perms-gv10"
     description = [name]
-    command = ["sh", "-c", "sudo chmod -R 755 "+distroconf.rawimage_gecos]
+    command = ["sh", "-c", "sudo chmod -R 755 "+distroconf.rawimage_gv10]
 
     def __init__(self, **kwargs):
         ShellCommand.__init__(self, **kwargs)
 
 
-class SetBinaryPermsGecosLight(ShellCommand):
-    name = "set-binary-perms-gecos-light"
+class SetBinaryPermsGv10Lite(ShellCommand):
+    name = "set-binary-perms-gv10-lite"
     description = [name]
-    command = ["sh", "-c", "sudo chmod -R 755 "+distroconf.rawimage_gecos_light]
+    command = ["sh", "-c", "sudo chmod -R 755 "+distroconf.rawimage_gv10_lite]
 
     def __init__(self, **kwargs):
         ShellCommand.__init__(self, **kwargs)

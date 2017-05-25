@@ -4,7 +4,7 @@ import os
 from twisted.application import service
 from buildbot.master import BuildMaster
 
-basedir = r'/var/gensys/testsys/gv9master'
+basedir = r'/var/gensys/testsys/gv10master'
 rotateLength = 10000000
 maxRotatedFiles = 10
 

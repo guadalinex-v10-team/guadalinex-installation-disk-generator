@@ -6,7 +6,7 @@ then
         exit 1
 fi
 
-buildbot start /var/gensys/testsys/gv9master
+buildbot start /var/gensys/testsys/gv10master
 cd /var/gensys/testsys/pkgbuilderbot; buildslave start; cd ..
 cd /var/gensys/testsys/gensysbot; buildslave start; cd ..
 
