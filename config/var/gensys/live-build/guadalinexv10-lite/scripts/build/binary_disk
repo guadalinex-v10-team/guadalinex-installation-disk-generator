@@ -62,8 +62,8 @@ case "${LB_MODE}" in
 
 	ubuntu)
 		#TITLE="Ubuntu"
-		TITLE="Gecos"
-		VERSION="v2"
+		TITLE="Guadalinex"
+		VERSION="v10"
 		STRING="Build ${ARCHITECTURE}"
 		TRACE=""
 		;;

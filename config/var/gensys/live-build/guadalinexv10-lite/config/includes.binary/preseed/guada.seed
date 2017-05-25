@@ -31,10 +31,13 @@ ubiquity countrychooser/country-name string Spain
 ubiquity tzconfig/gmt boolean false
 ubiquity time/zone select Europe/Madrid
 
+ubiquity cdrom/codename string trusty
+ubiquity mirror/codename string trusty
+
 ubiquity ubiquity/online note
 ubiquity ubiquity/summary note
 ubiquity ubiquity/download_updates boolean false
 unattended-upgrades unattended-upgrades/enable_auto_updates boolean false
-ubiquity ubiquity/success_command string /usr/share/guada-ubiquity/final_fixes.sh
-ubiquity ubiquity/install/success_command string /usr/share/guada-ubiquity/final_fixes.sh
+ubiquity ubiquity/success_command string /usr/share/gecos-ubiquity/final_fixes.sh
+ubiquity ubiquity/install/success_command string /usr/share/gecos-ubiquity/final_fixes.sh
 #

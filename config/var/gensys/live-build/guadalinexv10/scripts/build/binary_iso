@@ -68,7 +68,7 @@ case "${LB_PARENT_DISTRIBUTION}" in
 
 		if [ "${LB_BINARY_IMAGES}" = "iso-hybrid" ]
 		then
-			Check_package chroot/usr/lib/syslinux/isohdpfx.bin syslinux-common
+			Check_package chroot/usr/lib/ISOLINUX/isohdpfx.bin isolinux
 		fi
 		;;
 esac
@@ -96,7 +96,7 @@ case "${LB_PARENT_DISTRIBUTION}" in
 	*)
 		if [ "${LB_BINARY_IMAGES}" = "iso-hybrid" ]
 		then
-			XORRISO_OPTIONS="${XORRISO_OPTIONS} -isohybrid-mbr /usr/lib/syslinux/isohdpfx.bin -partition_offset 16"
+			XORRISO_OPTIONS="${XORRISO_OPTIONS} -isohybrid-mbr /usr/lib/ISOLINUX/isohdpfx.bin -partition_offset 16"
 		fi
 		;;
 esac
@@ -130,6 +130,12 @@ if [ -n "${LB_ISO_VOLUME}" ] && [ "${LB_ISO_VOLUME}" != "none" ]
 then
 	XORRISO_OPTIONS="${XORRISO_OPTIONS} -V \"${LB_ISO_VOLUME}\""
 fi
+
+Echo_message "LB_ISO_PREPARER=${LB_ISO_PREPARER}"
+Echo_message "LB_ISO_PUBLISHER=${LB_ISO_PUBLISHER}"
+Echo_message "LB_ISO_VOLUME=${LB_ISO_VOLUME}"
+Echo_message "XORRISO_OPTIONS=${XORRISO_OPTIONS}"
+echo XORRISO_OPTIONS=$XORRISO_OPTIONS
 
 # Handle xorriso architecture specific options
 case "${LB_BOOTLOADER}" in
@@ -260,7 +266,8 @@ case "${LB_BUILD_WITH_CHROOT}" in
 
 	false)
 		sh binary.sh
-		rm -f binary.sh
+		# Dejo binary.sh para depurar
+		#rm -f binary.sh
 		;;
 esac
 

@@ -1,2 +1,3 @@
-#deb http://localhost/mint-qiana qiana main upstream import backport romeo
-deb http://v2.gecos.guadalinex.org/mint qiana main upstream import backport
+#deb http://localhost/mint-qiana sarah main upstream import backport 
+#deb http://v10.guadalinex.org/mint sarah main upstream import backport
+deb http://v3.gecos.guadalinex.org/mint sarah main upstream import backport

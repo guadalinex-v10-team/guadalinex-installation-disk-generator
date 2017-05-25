@@ -33,8 +33,8 @@ LB_BOOTLOADER="syslinux"
 LB_CHECKSUMS="md5"
 
 # $LB_COMPRESSION: set compression
-# (Default: gzip)
-LB_COMPRESSION="gzip"
+# (Default: xz)
+LB_COMPRESSION="xz"
 
 # $LB_ZSYNC: set zsync
 # (Default: false)
@@ -46,12 +46,12 @@ LB_ZSYNC="false"
 LB_BUILD_WITH_CHROOT="true"
 
 # $LB_DEBIAN_INSTALLER: set debian-installer
-# (Default: false)
-LB_DEBIAN_INSTALLER="false"
+# (Default: live)
+LB_DEBIAN_INSTALLER="live"
 
 # $LB_DEBIAN_INSTALLER_DISTRIBUTION: set debian-installer suite
 # (Default: empty)
-LB_DEBIAN_INSTALLER_DISTRIBUTION="trusty"
+LB_DEBIAN_INSTALLER_DISTRIBUTION="xenial"
 
 # $LB_DEBIAN_INSTALLER_PRESEEDFILE: set debian-installer preseed filename/url
 # (Default: )
@@ -78,16 +78,16 @@ LB_HDD_SIZE="10000"
 LB_ISO_APPLICATION="Ubuntu Live"
 
 # $LB_ISO_PREPARER: set iso preparer
-# (Default: live-build 3.0.5-1; guadalinex team)
-LB_ISO_PREPARER="live-build 3.0.5-1; GECOS Team"
+# (Default: live-build 3.0.5-1; Guadalinex Team)
+LB_ISO_PREPARER="live-build 3.0.5-1; Guadalinex Team"
 
 # $LB_ISO_PUBLISHER: set iso publisher
 # (Default: Debian Live project; http://live.debian.net/; debian-live@lists.debian.org)
 LB_ISO_PUBLISHER="Debian Live project; http://live.debian.net/; debian-live@lists.debian.org"
 
 # $LB_ISO_VOLUME: set iso volume (max 32 chars)
-# (Default: Guadalinex V9 20140124-12:40)
-LB_ISO_VOLUME="GECOS V2 2015"
+# (Default: Guadalinex V10 2017)
+LB_ISO_VOLUME="Guadalinex V10 2017"
 
 # $LB_JFFS2_ERASEBLOCK: set jffs2 eraseblock size
 # (Default: unset)

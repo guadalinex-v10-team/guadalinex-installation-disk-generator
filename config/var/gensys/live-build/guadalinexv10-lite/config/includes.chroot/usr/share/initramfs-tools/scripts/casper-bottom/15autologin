@@ -72,7 +72,6 @@ if [ -f /root/etc/lxdm/lxdm.conf ]; then
    sed -i -r \
         -e "s/^# autologin=dgod/autologin=$USERNAME/" \
         -e "s/^# session/session/" \
-        -e "s/startlxde/startlubuntu/" \
         /root/etc/lxdm/lxdm.conf
 fi
 
@@ -81,7 +80,6 @@ if [ -f /root/etc/xdg/lubuntu/lxdm/lxdm.conf ]; then
    sed -i -r \
         -e "s/^# autologin=dgod/autologin=$USERNAME/" \
         -e "s/^# session/session/" \
-        -e "s/startlxde/startlubuntu/" \
         /root/etc/xdg/lubuntu/lxdm/lxdm.conf
 fi
 

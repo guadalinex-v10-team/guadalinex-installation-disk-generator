@@ -3,12 +3,12 @@
 rm /etc/apt/sources.list.d/*
 
 cat > /etc/apt/sources.list <<EOF
-deb http://v2.gecos.guadalinex.org/ubuntu   trusty             main restricted universe multiverse
-deb http://v2.gecos.guadalinex.org/ubuntu   trusty-updates     main restricted universe multiverse
-deb http://v2.gecos.guadalinex.org/ubuntu   trusty-security    main restricted universe multiverse
-deb http://v2.gecos.guadalinex.org/ubuntu   trusty-backports   main restricted universe multiverse
+deb http://v10.guadalinex.org/ubuntu   xenial             main restricted universe multiverse
+deb http://v10.guadalinex.org/ubuntu   xenial-updates     main restricted universe multiverse
+deb http://v10.guadalinex.org/ubuntu   xenial-security    main restricted universe multiverse
+deb http://v10.guadalinex.org/ubuntu   xenial-backports   main restricted universe multiverse
 
-deb http://v2.gecos.guadalinex.org/mint     maya                main upstream import backport
+deb http://v10.guadalinex.org/mint     sarah                main upstream import backport
 
-deb http://v2.gecos.guadalinex.org/gecos    v2                  main 
+deb http://v10.guadalinex.org/guadalinex-cerdo    cerdo                  main 
 EOF

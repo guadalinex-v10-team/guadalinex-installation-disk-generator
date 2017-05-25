@@ -1,0 +1,40 @@
+#!/bin/bash
+
+# Script that checks /run/user/999/dconf/user file
+# and fix the owner
+
+
+USER=$(whoami)
+FILE=$XDG_RUNTIME_DIR/dconf/user
+echo USER=$USER FILE=$FILE
+
+while true
+do
+	if [ -f $FILE ]; then
+		OWNER=$(stat -c %U $FILE)
+		echo OWNER=$OWNER
+		
+		if [ "$OWNER" != "$USER" ]; then
+			echo "$OWNER" != "$USER"
+			sudo chown $USER:$USER $FILE
+		fi
+
+		while inotifywait -q -e attrib $FILE; do
+		    echo "File changed"
+
+			OWNER=$(stat -c %U $FILE)
+			echo OWNER=$OWNER
+		
+			if [ "$OWNER" != "$USER" ]; then
+				echo "$OWNER" != "$USER"
+				sudo chown $USER:$USER $FILE
+			fi
+
+		done
+
+		
+	fi
+	sleep 1
+done
+
+

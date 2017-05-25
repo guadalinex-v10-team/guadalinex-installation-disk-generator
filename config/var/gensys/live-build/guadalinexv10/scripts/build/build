@@ -10,7 +10,7 @@
 
 set -e
 
-echo "GENERANDO GECOS V2"
+echo "GENERANDO Guadalinex V10"
 
 # Including common functions
 [ -e "${LIVE_BUILD}/scripts/build.sh" ] && . "${LIVE_BUILD}/scripts/build.sh" || . /usr/lib/live/build.sh

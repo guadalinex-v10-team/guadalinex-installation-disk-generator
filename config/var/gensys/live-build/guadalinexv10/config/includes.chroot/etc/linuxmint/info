@@ -1,11 +1,11 @@
-RELEASE=14.04
+RELEASE=16.04
 DISTRIB_ID=Ubuntu
-CODENAME=trusty
-EDITION="Cinnamon 32-bit"
-DESCRIPTION="GECOS V2"
+CODENAME=xenial
+EDITION="Cinnamon 64-bit"
+DESCRIPTION="Guadalinex V10"
 DESKTOP=Cinnamon
 TOOLKIT=GTK
 NEW_FEATURES_URL=http://www.guadalinex.org
 RELEASE_NOTES_URL=http://www.guadalinex.org
 USER_GUIDE_URL=http://www.guadalinex.org
-GRUB_TITLE=GECOS V2 32bits
+GRUB_TITLE=Guadalinex V10 64bits

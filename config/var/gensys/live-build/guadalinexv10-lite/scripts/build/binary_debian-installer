@@ -7,7 +7,6 @@
 ## This is free software, and you are welcome to redistribute it
 ## under certain conditions; see COPYING for details.
 
-
 set -e
 
 # Including common functions
@@ -70,8 +69,15 @@ Check_package chroot/usr/bin/apt-ftparchive apt-utils
 # Restoring cache
 Restore_cache cache/packages.binary
 
+# Parcheo el fichero resolv.conf
+cp chroot/etc/resolv.conf chroot/etc/resolv.conf.old
+cp /etc/resolv.conf chroot/etc/resolv.conf
+
 # Installing depends
 Install_package
+
+# Restauro el fichero resolv.conf
+mv chroot/etc/resolv.conf.old chroot/etc/resolv.conf
 
 # Setting destination directory
 case "${LB_BINARY_IMAGES}" in
@@ -328,6 +334,7 @@ else
 	fi
 fi
 
+
 # Only download additional packages if appropriate
 if [ "${DI_IMAGE_TYPE}" != "netboot" ]
 then
@@ -359,7 +366,8 @@ then
 			;;
 
 		i386)
-			DI_REQ_PACKAGES="elilo lilo grub-pc"
+			#DI_REQ_PACKAGES="lilo grub-pc grub-efi grub-efi-amd64 grub-efi-ia32"
+			DI_REQ_PACKAGES="lilo grub-pc"
 
 			case "${LB_DISTRIBUTION}" in
 				squeeze)
@@ -370,7 +378,7 @@ then
 			case "${LB_MODE}" in
 				ubuntu)
 					case "${LB_DISTRIBUTION}" in
-						precise)
+						trusty)
 							DI_PACKAGES="${DI_REQ_PACKAGES} linux-generic-pae"
 							;;
 
@@ -523,20 +531,35 @@ then
 		# d-i does not support (for example) re-installing grub from target/ - the grub
 		# .debs must actually exist.
 
+		# Preparo el fichero resolv.conf dentro del enjaulado
+		cp chroot/etc/resolv.conf chroot/etc/resolv.conf.old
+		cp /etc/resolv.conf chroot/etc/resolv.conf
+
 		# Download .debs of the required packages
 		Chroot chroot ${_LB_APT_COMMAND} install ${DI_PACKAGES} ${DI_FIRMWARE_PACKAGES} ${DI_REQ_PACKAGES}
 
+		# Descargo tambien el Grub para UEFI
+		Chroot chroot ${_LB_APT_COMMAND} install grub-efi
+		Chroot chroot ${_LB_APT_COMMAND} install grub-efi-amd64
+		Chroot chroot ${_LB_APT_COMMAND} install grub-efi-ia32
+
 		# Drop the packages already installed that d-i doesn't explicitely need
-		_REMAINING_PACKAGES="$(echo ${DI_FIRMWARE_PACKAGES} ${DI_REQ_PACKAGES} | sed -e 's# #|#g')"
+		_REMAINING_PACKAGES="$(echo ${DI_FIRMWARE_PACKAGES} ${DI_REQ_PACKAGES} grub-efi grub-efi-amd64 grub-efi-ia32 | sed -e 's# #|#g')"
 		_REMAINING_PACKAGES="$(sed -n -e 's|Package: ||p' chroot/var/lib/dpkg/status.tmp | grep -E -v \"^${_REMAINING_PACKAGES}$\")"
 
 		for _PACKAGE in ${_REMAINING_PACKAGES}
 		do
 			rm -f "chroot/binary.deb/archives/${_PACKAGE}_*.deb"
 		done
+
+
+		# Restauro el fichero resolv.conf
+		mv chroot/etc/resolv.conf.old chroot/etc/resolv.conf
+
 	else
 		# Download .debs of the required packages
 		Chroot chroot ${_LB_APT_COMMAND} install ${DI_PACKAGES} ${DI_FIRMWARE_PACKAGES}
+
 	fi
 
 	# Revert dpkg status file

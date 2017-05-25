@@ -1,0 +1,3 @@
+#deb http://localhost/guadalinex cerdo main 
+#Deleted Ubuntu and Mint repositories
+deb http://v10.guadalinex.org/guadalinex-cerdo/    cerdo                 main 

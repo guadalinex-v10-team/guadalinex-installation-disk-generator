@@ -20,11 +20,11 @@ LB_APT_HTTP_PROXY=""
 LB_APT_PIPELINE=""
 
 # $LB_APT_RECOMMENDS: set apt/aptitude recommends
-# (Default: true)
+# (Default: false)
 LB_APT_RECOMMENDS="false"
 
 # $LB_APT_SECURE: set apt/aptitude security
-# (Default: false)
+# (Default: true)
 LB_APT_SECURE="true"
 
 # $LB_APT_SOURCE_ARCHIVES: set apt/aptitude source entries in sources.list

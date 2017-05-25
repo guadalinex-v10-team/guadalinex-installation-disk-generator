@@ -52,9 +52,10 @@ case "${LB_DERIVATIVE}" in
 		;;
 esac
 
+Echo_message "operation = ${1} ===================================================="
 case "${1}" in
 	install)
-		Echo_message "Configuring file /etc/apt/sources.list"
+		Echo_message "Configuring file /etc/apt/sources.list -----------------"
 
 		# Checking stage file
 		Check_stagefile .build/chroot_archives
@@ -551,8 +552,7 @@ EOF
 			# the cached indices and rebuild them again.
 			rm -rf chroot/var/cache/apt/*.bin
 
-			#ALF nyapa
-			#Apt chroot update
+			Apt chroot update
 
 			# Installing keyring packages
 			if [ -n "${LB_KEYRING_PACKAGES}" ]
@@ -562,9 +562,15 @@ EOF
 
 			rm -rf chroot/var/cache/apt/*.bin
 
+			Echo_message " ====================== before update ==========================="
 			Apt chroot update
+			Echo_message " ====================== before libgtk3 =========================== "
+			Apt chroot install libgtk-3-0 adwaita-icon-theme-full
+			Echo_message " ====================== before upgrade ============================= "
 			Apt chroot "upgrade"
+			Echo_message " ===================== before dist upgrade ========================= "
 			Apt chroot "dist-upgrade"
+			Echo_message " ======================= after dist upgrade =========================== "
 
 			if [ "${LB_CACHE_INDICES}" = "true" ]
 			then
@@ -868,12 +874,56 @@ EOF
 		done
 
 		# Updating indices
-		# ALF nyapa
- 		#cp chroot/etc/hosts chroot/etc/hosts.old
-		#echo "127.0.0.1 v2.gecos.guadalinex.org" >> chroot/etc/hosts
-		#Apt chroot update
-		#mv chroot/etc/hosts.old chroot/etc/hosts
-		# fin de la nyapa
+		Apt chroot update
+		
+		# Reinstalamos los paquetes que queremos "pinear"
+
+		# Desisntala el Firefox de Ubuntu e Instala firefox ESR
+		Apt chroot purge -y firefox
+		rm -rf chroot/usr/lib/firefox
+		rm -rf chroot/usr/lib/firefox-addons
+
+		Apt chroot install -y firefox guadalinexv10-light-meta
+
+	       rm -rf chroot/usr/share/applications/launch.dnie.desktop
+
+               # Remove unnecessary packages
+               chroot chroot dpkg --purge xterm
+               chroot chroot dpkg --force-remove-essential --purge mintsources
+               chroot chroot apt-get autoremove -y
+
+               # Set default gksu properties
+               chroot chroot gconftool-2 --direct --config-source   xml:readwrite:/etc/gconf/gconf.xml.defaults  --set --type boolean /apps/gksu/sudo-mode true
+               chroot chroot gconftool-2 --set --type boolean /apps/gksu/sudo-mode true
+
+               # Create default /etc/machine-id
+               chroot chroot dbus-uuidgen > chroot/etc/machine-id
+
+               # Install autofirma
+               Echo_message Install autofirma package
+               Apt chroot install -y libnss3-tools jarwrapper
+               chroot chroot mv /usr/bin/java /usr/bin/java.orig
+               echo \#\!/bin/bash > chroot/usr/bin/java
+               echo "" >> chroot/usr/bin/java
+               echo "echo JAVA disabled for autofirma package installation" >> chroot/usr/bin/java
+               chmod +x chroot/usr/bin/java
+               cp extra/autofirma-1.5.0.JAv03-1.deb chroot/root/.
+               chroot chroot dpkg -i /root/autofirma-1.5.0.JAv03-1.deb
+               rm chroot/root/autofirma*.deb
+               rm chroot/usr/bin/java
+               chroot chroot mv /usr/bin/java.orig /usr/bin/java
+
+               Echo_message "Try silent configuration (this will fail)"
+               # Try silent configuration (this will fail and the error will be ignored)
+               chroot chroot /usr/bin/java -Djava.awt.headless=true -Dawt.toolkit=sun.awt.HToolkit -cp /usr/lib/AutoFirma/AutoFirmaConfigurador.jar es.gob.afirma.standalone.configurator.AutoFirmaConfiguratorSilent || true
+               Echo_message "Add SocketAutoFirmaLocal certificate to Firefox default profile"
+               # Add "SocketAutoFirmaLocal" certificate to Firefox default profile
+               chroot chroot /usr/bin/certutil -A -d /opt/firefox/browser/defaults/profile/  -i /usr/lib/AutoFirma/autofirma.cer -n "SocketAutoFirmaLocal" -t "C,," 
+               Echo_message  "Set Autofirma as default application for afirma:// protocol"
+               # Set Autofirma as default application for afirma:// protocol
+               chroot chroot /usr/bin/xdg-mime default /usr/share/applications/afirma.desktop x-scheme-handler/afirma
+
+               Echo_message "Cleaning apt package cache"
 
 		# Cleaning apt package cache
 		rm -rf chroot/var/cache/apt
@@ -896,17 +946,19 @@ EOF
 			Chroot chroot apt-key del ${_LB_LOCAL_KEY_EMAIL}
 		fi
 
-		#ALF
-		Chroot chroot apt-key del 9B97301C
-		Chroot chroot apt-key del CE6CD7DA
-		Chroot chroot apt-key del DCDF9ED5
-		Chroot chroot apt-key del 4DCB1736
+                #ALF
+                Chroot chroot apt-key del 9B97301C
                 Chroot chroot apt-key del 2D65C94E
+                Chroot chroot apt-key del 4DCB1736
+                Chroot chroot apt-key del CE6CD7DA
+                Chroot chroot apt-key del DCDF9ED5
 
-		echo "#Sources in sources.list.d/gecos-v2.list" > chroot/etc/apt/${_PARENT_FILE}
+		echo "#Sources in sources.list.d/official-package-repositories.list" > chroot/etc/apt/${_PARENT_FILE}
 
 		# Removing stage file
 		rm -f .build/chroot_archives
+
+
 		;;
 
 	*)

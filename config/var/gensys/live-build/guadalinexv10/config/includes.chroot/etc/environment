@@ -1,0 +1,6 @@
+PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games"
+export GNOME_ACCESSIBILITY=1
+export GTK_ACCESSIBILITY=1
+export QT_LINUX_ACCESSIBILITY_ALWAYS_ON=1
+export QT_ACCESSIBILITY=1
+

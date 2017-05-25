@@ -3,11 +3,12 @@
 rm /etc/apt/sources.list.d/*
 
 cat > /etc/apt/sources.list <<EOF
-deb http://fr.archive.ubuntu.com/ubuntu precise main restricted universe multiverse
-deb http://fr.archive.ubuntu.com/ubuntu precise-updates main restricted universe multiverse
-deb http://fr.archive.ubuntu.com/ubuntu precise-security main restricted universe multiverse
-deb http://fr.archive.ubuntu.com/ubuntu precise-backports main restricted universe multiverse
-deb http://archive.canonical.com/ubuntu precise partner
+deb http://v10.guadalinex.org/ubuntu   xenial             main restricted universe multiverse
+deb http://v10.guadalinex.org/ubuntu   xenial-updates     main restricted universe multiverse
+deb http://v10.guadalinex.org/ubuntu   xenial-security    main restricted universe multiverse
+deb http://v10.guadalinex.org/ubuntu   xenial-backports   main restricted universe multiverse
 
-deb http://packages.linuxmint.com/ maya main upstream import backport
+deb http://v10.guadalinex.org/mint     sarah                main upstream import backport
+
+deb http://v10.guadalinex.org/guadalinex-cerdo    cerdo                  main 
 EOF

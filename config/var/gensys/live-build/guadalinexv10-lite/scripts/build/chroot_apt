@@ -85,6 +85,8 @@ case "${1}" in
 				echo "Aptitude::CmdLine::Ignore-Trust-Violations \"true\";" >> chroot/etc/apt/apt.conf.d/00secure
 				;;
 		esac
+		# Fix permissions
+		chmod 644 chroot/etc/apt/apt.conf.d/*
 
 		# Configuring apt config
 		if [ -f config/apt/apt.conf ]

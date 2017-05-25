@@ -1,0 +1,32 @@
+#!/bin/bash
+
+for x in $(cat /proc/cmdline); do
+	case $x in
+		# Lesser Visual Impairment
+		access=v1)
+                        ;;
+		# Moderate Visual Impairment
+		access=v2)
+                        ;;
+		# Blindness
+		access=v3)
+			# Start festival service
+			service festival start
+                        ;;
+		# Braille
+		braille=ask)
+                        ;;
+		# Minor Motor Difficulties
+		access=m1)
+                        ;;
+		# Motor Difficulties - pointing devices
+		access=m2)
+                        ;;
+	esac
+done
+
+# Fix dconf ownership
+/usr/bin/dconf-fix &
+
+
+
